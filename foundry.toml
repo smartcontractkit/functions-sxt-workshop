@@ -1,0 +1,9 @@
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib']
+
+# Allow the script to read files from the functions-src directory
+fs_permissions = [{ access = "read", path = "./functions-src/"}]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
