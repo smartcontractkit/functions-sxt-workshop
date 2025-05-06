@@ -15,7 +15,7 @@ import {SxtNumericQuery} from "../src/SxtNumericQuery.sol"; // Import the correc
 contract RequestSxtData is Script {
 
     // The SXT SQL query to execute
-    string public constant SXT_QUERY = "select BITCOIN.STATS.AVG_FEE from BITCOIN.STATS limit 1";
+    string public constant SXT_QUERY = "SELECT AVG(BITCOIN.STATS.AVG_FEERATE) FROM BITCOIN.STATS WHERE TIME_STAMP >= CURRENT_DATE - INTERVAL '3 days' AND TIME_STAMP < CURRENT_DATE + INTERVAL '1 day';";
 
     // DON secrets slot ID (assuming 0)
     uint8 constant SLOT_ID = 0;
