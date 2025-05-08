@@ -20,7 +20,7 @@ contract DeploySxtNumericQuery is Script {
         // --- Configuration ---
 
         // Get Subscription ID from environment variable
-        uint256 subscriptionId_uint256 = vm.envOr("FUNCTIONS_SUBSCRIPTION_ID", uint256(0));
+        uint256 subscriptionId_uint256 = vm.envUint("FUNCTIONS_SUBSCRIPTION_ID");
         if (subscriptionId_uint256 == 0) {
             revert("FUNCTIONS_SUBSCRIPTION_ID environment variable not set or is 0.");
         }
@@ -39,7 +39,7 @@ contract DeploySxtNumericQuery is Script {
         }
 
         // Get deployer private key from environment variable
-        uint256 deployerPrivateKey = vm.envOr("PRIVATE_KEY", uint256(0));
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         if (deployerPrivateKey == 0) {
             revert("PRIVATE_KEY environment variable not set.");
         }
