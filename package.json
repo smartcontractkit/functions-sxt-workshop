@@ -11,6 +11,19 @@
   "license": "MIT",
   "dependencies": {
     "@chainlink/functions-toolkit": "^0.3.2",
+    "dotenv": "^16.5.0",
     "ethers": "^5.7"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "bufferutil",
+      "eccrypto",
+      "keccak",
+      "secp256k1",
+      "utf-8-validate"
+    ],
+    "onlyBuiltDependencies": [
+      "bcrypto"
+    ]
   }
 }

@@ -13,9 +13,9 @@ import {SxtNumericQuery} from "../src/SxtNumericQuery.sol"; // Import the correc
  * Run with: forge script script/RequestSxtData.s.sol --rpc-url $RPC_URL --broadcast -vvvv
  */
 contract RequestSxtData is Script {
-
     // The SXT SQL query to execute
-    string public constant SXT_QUERY = "SELECT AVG(BITCOIN.STATS.AVG_FEERATE) FROM BITCOIN.STATS WHERE TIME_STAMP >= CURRENT_DATE - INTERVAL '3 days' AND TIME_STAMP < CURRENT_DATE + INTERVAL '1 day';";
+    string public constant SXT_QUERY =
+        "SELECT AVG(BITCOIN.STATS.AVG_FEERATE) FROM BITCOIN.STATS WHERE TIME_STAMP >= CURRENT_DATE - INTERVAL '3 days' AND TIME_STAMP < CURRENT_DATE + INTERVAL '1 day';";
 
     // DON secrets slot ID (assuming 0)
     uint8 constant SLOT_ID = 0;
@@ -28,13 +28,13 @@ contract RequestSxtData is Script {
         }
 
         // Get the broadcaster/sender private key from environment variable
-        uint256 broadcasterPrivateKey = vm.envOr("PRIVATE_KEY", uint256(0));
+        uint256 broadcasterPrivateKey = vm.envUint("PRIVATE_KEY");
         if (broadcasterPrivateKey == 0) {
             revert("PRIVATE_KEY environment variable not set.");
         }
 
         // Get Functions Secrets version from environment variable
-        uint256 secretsVersion_uint256 = vm.envOr("FUNCTIONS_SECRETS_VERSION", uint256(0));
+        uint256 secretsVersion_uint256 = vm.envUint("FUNCTIONS_SECRETS_VERSION");
         if (secretsVersion_uint256 == 0) {
             revert("FUNCTIONS_SECRETS_VERSION environment variable not set or is 0.");
         }
@@ -48,12 +48,8 @@ contract RequestSxtData is Script {
         SxtNumericQuery sxtContract = SxtNumericQuery(contractAddress);
 
         // Call the request function passing query, slot ID, and version
-        bytes32 requestId = sxtContract.requestNumericResult(
-            SXT_QUERY,
-            SLOT_ID,
-            secretsVersion
-        );
+        bytes32 requestId = sxtContract.requestNumericResult(SXT_QUERY, SLOT_ID, secretsVersion);
 
         vm.stopBroadcast();
     }
-} 
+}
