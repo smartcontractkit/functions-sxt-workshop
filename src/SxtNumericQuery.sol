@@ -23,6 +23,7 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
     bytes public latestResponse; // Raw response from the DON
     bytes public latestError;    // Raw error from the DON
     uint256 public latestNumericResult; // Stores the latest numeric result (scaled)
+    string public sqlQuery; // Stores the SXT SQL query
 
     // JavaScript source code for the Function
     string public source;
@@ -45,14 +46,12 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
     }
 
     /**
-     * @notice Triggers a Chainlink Functions request to execute the specified SXT query.
-     * @param _query The SXT SQL query to execute.
+     * @notice Triggers a Chainlink Functions request to execute the stored SXT query.
      * @param slotID The DON secrets slot ID containing the SXT API Key.
      * @param version The DON secrets version.
      * @return requestId The ID of the sent request.
      */
     function requestNumericResult(
-        string memory _query,
         uint8 slotID,
         uint64 version
     )
@@ -61,7 +60,7 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
         returns (bytes32 requestId)
     {
         string[] memory args = new string[](1);
-        args[0] = _query;
+        args[0] = sqlQuery; // Use the stored SQL query
         // API key is NOT in args, it comes from secrets
 
         FunctionsRequest.Request memory req;
@@ -77,6 +76,9 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
 
         if (bytes(source).length == 0) {
             revert("Source code not set");
+        }
+        if (bytes(sqlQuery).length == 0) {
+            revert("SQL query not set");
         }
 
         // Standard _sendRequest
@@ -121,6 +123,10 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
 
     function setSource(string memory _source) external onlyOwner {
         source = _source;
+    }
+
+    function setSqlQuery(string memory _newQuery) external onlyOwner {
+        sqlQuery = _newQuery;
     }
 
     function setGasLimit(uint32 _gasLimit) external onlyOwner {
