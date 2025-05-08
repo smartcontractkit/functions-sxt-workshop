@@ -40,7 +40,7 @@ contract DeploySxtNumericQuery is Script {
 
         // Get deployer private key from environment variable
         uint256 deployerPrivateKey = vm.envOr("PRIVATE_KEY", uint256(0));
-         if (deployerPrivateKey == 0) {
+        if (deployerPrivateKey == 0) {
             revert("PRIVATE_KEY environment variable not set.");
         }
 
@@ -55,4 +55,4 @@ contract DeploySxtNumericQuery is Script {
 
         console.log("SxtNumericQuery contract deployed at:", address(sxtContract));
     }
-} 
+}

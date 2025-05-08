@@ -7,3 +7,6 @@ libs = ['lib']
 fs_permissions = [{ access = "read", path = "./functions-src/"}]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+[dependencies]
+forge-std="foundry-rs/forge-std@v1.9.7"
+chainlink-evm="https://github.com/smartcontractkit/chainlink-evm"
