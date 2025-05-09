@@ -5,9 +5,6 @@ out/
 # Ignores development broadcast logs
 broadcast/
 
-# Ignores Foundry dependencies
-lib/
-
 # Ignores Node.js dependencies
 node_modules/
 
