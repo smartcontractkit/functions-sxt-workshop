@@ -13,10 +13,6 @@ import {SxtNumericQuery} from "../src/SxtNumericQuery.sol"; // Import the correc
  * Run with: forge script script/RequestSxtData.s.sol --rpc-url $RPC_URL --broadcast -vvvv
  */
 contract RequestSxtData is Script {
-    // The SXT SQL query to execute
-    string public constant SXT_QUERY =
-        "SELECT AVG(BITCOIN.STATS.AVG_FEERATE) AS AVG_FEE FROM BITCOIN.STATS WHERE TIME_STAMP >= CURRENT_DATE - INTERVAL 14 days AND TIME_STAMP < CURRENT_DATE + INTERVAL 1 day;";
-
     // DON secrets slot ID (assuming 0)
     uint8 constant SLOT_ID = 0;
 
@@ -48,7 +44,7 @@ contract RequestSxtData is Script {
         SxtNumericQuery sxtContract = SxtNumericQuery(contractAddress);
 
         // Call the request function passing query, slot ID, and version
-        bytes32 requestId = sxtContract.requestNumericResult(SXT_QUERY, SLOT_ID, secretsVersion);
+        bytes32 requestId = sxtContract.requestNumericResult(SLOT_ID, secretsVersion);
 
         vm.stopBroadcast();
     }

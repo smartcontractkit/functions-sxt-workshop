@@ -93,7 +93,7 @@ Note: use screenshots + on-image boxes/circles/arrows at key points to help devs
 
     - Run the script to upload your SXT API Key to the DON:
       ```bash
-      node scripts/uploadSecrets.js
+      node script/uploadSecrets.js
       ```
     - The script will output a **version number**. Copy this number and add it to your `.env` file as `FUNCTIONS_SECRETS_VERSION`.
     - Re-load the environment variables into your terminal session:
@@ -128,12 +128,21 @@ Note: use screenshots + on-image boxes/circles/arrows at key points to help devs
       source .env
       ```
 
-7.  **Add Consumer to Subscription:**
+7.  **Set the SQL Query on the Contract:**
+
+    - After deploying the contract and setting its address in your environment, set the SQL query that the contract will use.
+    - Run the `SetSxtSqlQuery` script:
+      ```bash
+      forge script script/SetSxtSqlQuery.s.sol --rpc-url $RPC_URL --broadcast -vvvv
+      ```
+    - This script uses the `CONTRACT_ADDRESS` (which you should have set in your `.env` file from the previous step) and `PRIVATE_KEY` from your `.env` file to call the `setSqlQuery` function on your deployed contract.
+
+8.  **Add Consumer to Subscription:**
 
     - Go back to your [Chainlink Functions subscription page](functions.chain.link) in the UI.
-    - Add the deployed **Contract Address** (from Step 7) as an authorized consumer.
+    - Add the deployed **Contract Address** (from Step 6) as an authorized consumer.
 
-8.  **Request Data:**
+9.  **Request Data:**
 
     - Run the request script:
       ```bash
@@ -151,7 +160,7 @@ Note: use screenshots + on-image boxes/circles/arrows at key points to help devs
     ==========================
     ```
 
-9.  **Check the Result:**
+10. **Check the Result:**
 
     - Wait ~1-2 minutes for the DON to process the request and fulfill it on-chain.
     - Use `cast` to read the `latestNumericResult` from your contract:
