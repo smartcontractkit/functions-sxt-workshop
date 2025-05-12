@@ -13,8 +13,8 @@ import {SxtNumericQuery} from "../src/SxtNumericQuery.sol";
  * Run with: forge script script/SetSxtSqlQuery.s.sol --rpc-url $RPC_URL --broadcast -vvvv
  */
 contract SetSxtSqlQuery is Script {
-    // The SXT SQL query to set
-    // Note: This query was previously in RequestSxtData.s.sol
+    
+    // @dev The SXT SQL query to set
     string public constant NEW_SXT_QUERY =
         "SELECT AVG(BITCOIN.STATS.AVG_FEERATE) AS AVG_FEE FROM BITCOIN.STATS WHERE TIME_STAMP >= CURRENT_DATE - INTERVAL 7 days AND TIME_STAMP < CURRENT_DATE + INTERVAL 1 day;";
 

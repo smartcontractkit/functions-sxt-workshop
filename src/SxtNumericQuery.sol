@@ -7,7 +7,7 @@ import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/l
 
 /**
  * @title SxtNumericQuery
- * @notice A generalized contract that requests a numeric result from an SXT query via Chainlink Functions.
+ * @notice A generalized contract that performs a SXT query via Chainlink Functions and receives the returned numeric result.
  * Uses DON-hosted secrets for the SXT API Key.
  */
 contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
@@ -21,7 +21,7 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
     uint64 public subscriptionId;
     uint32 public gasLimit = 300000; // Adjust gas limit as needed
     bytes public latestResponse; // Raw response from the DON
-    bytes public latestError;    // Raw error from the DON
+    bytes public latestError; // Raw error from the DON
     uint256 public latestNumericResult; // Stores the latest numeric result (scaled)
     string public sqlQuery; // Stores the SXT SQL query
 
@@ -51,14 +51,7 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
      * @param version The DON secrets version.
      * @return requestId The ID of the sent request.
      */
-    function requestNumericResult(
-        uint8 slotID,
-        uint64 version
-    )
-        external
-        onlyOwner
-        returns (bytes32 requestId)
-    {
+    function requestNumericResult(uint8 slotID, uint64 version) external onlyOwner returns (bytes32 requestId) {
         string[] memory args = new string[](1);
         args[0] = sqlQuery; // Use the stored SQL query
         // API key is NOT in args, it comes from secrets
@@ -82,27 +75,18 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
         }
 
         // Standard _sendRequest
-        requestId = _sendRequest(
-            FunctionsRequest.encodeCBOR(req),
-            subscriptionId,
-            gasLimit,
-            DON_ID
-        );
+        requestId = _sendRequest(FunctionsRequest.encodeCBOR(req), subscriptionId, gasLimit, DON_ID);
 
         return requestId;
     }
 
-     /**
+    /**
      * @notice Callback function for Chainlink Functions response.
      * @param requestId The ID of the original request.
      * @param response The response data received from the DON (expected to be uint256).
      * @param err The error data received from the DON (if any).
      */
-    function fulfillRequest(
-        bytes32 requestId,
-        bytes memory response,
-        bytes memory err
-    ) internal override {
+    function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) internal override {
         latestResponse = response;
         latestError = err;
 
@@ -132,4 +116,4 @@ contract SxtNumericQuery is FunctionsClient, ConfirmedOwner {
     function setGasLimit(uint32 _gasLimit) external onlyOwner {
         gasLimit = _gasLimit;
     }
-} 
+}

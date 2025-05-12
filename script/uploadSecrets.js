@@ -33,6 +33,7 @@ const gatewayUrls = [
 const slotId = 0; // Slot 0 for general user secrets
 const minutesUntilExpiration = 1440; // Reduced to 1 day (was 43800)
 
+// @dev Read about using the Functions-Toolkit here: https://docs.chain.link/chainlink-functions/functions-toolkit/
 const uploadSecrets = async () => {
   // Initialize ethers provider and signer
   const provider = new providers.JsonRpcProvider(process.env.RPC_URL);

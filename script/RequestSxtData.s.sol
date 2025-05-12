@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {Script} from "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
 import {SxtNumericQuery} from "../src/SxtNumericQuery.sol"; // Import the correct contract
 
 /**
@@ -45,6 +45,8 @@ contract RequestSxtData is Script {
 
         // Call the request function passing query, slot ID, and version
         bytes32 requestId = sxtContract.requestNumericResult(SLOT_ID, secretsVersion);
+        console.log("Functions Request ID: ");
+        console.logBytes32(requestId);
 
         vm.stopBroadcast();
     }
