@@ -1,0 +1,30 @@
+{
+  "name": "@chainlink/functions-sxt-workshop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chainlink Functions and SXT Demo",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@chainlink/functions-toolkit": "^0.3.2",
+    "dotenv": "^16.5.0",
+    "ethers": "^5.7"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "bufferutil",
+      "eccrypto",
+      "keccak",
+      "secp256k1",
+      "utf-8-validate"
+    ],
+    "onlyBuiltDependencies": [
+      "bcrypto"
+    ]
+  }
+}

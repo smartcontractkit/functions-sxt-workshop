@@ -1,0 +1,19 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+broadcast/
+
+# Ignores Node.js dependencies
+node_modules/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+
+# SXT Credentials and Session files
+sxt_credentials.json
+sxt_session.json
