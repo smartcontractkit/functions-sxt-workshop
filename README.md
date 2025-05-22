@@ -21,7 +21,7 @@ The entire code walkthrough, with screenshots and explanations are available in 
 
 For the canonical list, go to the Gitbook here: https://cll-devrel.gitbook.io/sxt-and-cl-functions
 
-1.  ##**Install Dependencies:**
+1.  **Install Dependencies:**
 
     - Install Foundry libraries:
 
