@@ -13,34 +13,13 @@ The specific example fetches the average Bitcoin transaction fee from the `BITCO
 - **SXT API Key:** Obtain an API key from [Space and Time](https://www.spaceandtime.io/). Create an account by launching the SXT Studio. The free tier is sufficient for this demo. Once you've created your account and logged into Studio, go to `My Account` >> `Developers & APIs` >> `API Authentication` and `Create API key`.
 - **Chainlink Functions Subscription:** You will create this in the setup steps.
 
-## TODO - LINK TO GITBOOK
+## Gitbook Walk Through
 
-TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-Topics to cover in Gitbook are below ( please remove from this README once done. )
-Note: use screenshots + on-image boxes/circles/arrows at key points to help devs follow along faster with visual cues.
-
-- SXT
-
-  - Overview of SXT
-  - What tables are we reading from SXT?
-  - how to create an SXT account via Studio
-  - how to create SXT Api Key
-
-- Functions
-
-  - overview & key primitives, some architecture (see : https://docs.chain.link/chainlink-functions/resources/architecture)
-  - functions client and the compulsory call back to be implemented
-  - what are secrets? How they get injected into runtime and how they get consumed. How we use the SXT API key as the secret in this demo
-  - show the JS script being used in functions playground to "rehearse" expected outcomes
-  - steps required to invoke Functions and walk through of `uploadSecrets` - key configs like version, `minutesUntilExpiration` , gateway URLs etc
-
-- Demo
-  - explain each of the files inside `./script`
-  - explain the source inside `./functions-src`
-  - describe expected outcomes when running the `cast` command that reads from the deployed contract
-  - [if possible ]connect it back to something that can be seen via the UI on SXT Studio
+The entire code walkthrough, with screenshots and explanations are available in our [Gitbook for this LinkLab](https://cll-devrel.gitbook.io/sxt-and-cl-functions).
 
 ## Setup
+
+For the canonical list, go to the Gitbook here: https://cll-devrel.gitbook.io/sxt-and-cl-functions
 
 1.  ##**Install Dependencies:**
 
